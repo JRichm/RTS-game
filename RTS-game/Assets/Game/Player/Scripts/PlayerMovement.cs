@@ -6,8 +6,8 @@ public class PlayerMovement : MonoBehaviour
 {
     public Camera playerCam;
 
-    public float moveSpeed = 5f;  // Speed of the player movement
-    public float zoomSpeed = 5f;  // Speed of camera zoom
+    public float moveSpeed = 20f;  // Speed of the player movement
+    public float zoomSpeed = 20f;  // Speed of camera zoom
     public float minZoomFOV = 20f;  // Minimum field of view for zoom
     public float maxZoomFOV = 60f;  // Maximum field of view for zoom
     public float scrollBoundary = 15f; // Distance from screen edge to trigger scrolling
