@@ -6,6 +6,7 @@ public class Structure : MonoBehaviour
 {
     public string structureName;
     public int startingHealth;
+    public List<GameObject> structureEntities;
 
     private int owner;
     private int structureHealth;
