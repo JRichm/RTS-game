@@ -4,5 +4,6 @@ using UnityEngine;
 
 public class Entity : MonoBehaviour
 {
-    public bool spawnable;
+    public int health;
+    public int moveSpeed;
 }
