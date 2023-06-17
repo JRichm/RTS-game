@@ -1,4 +1,6 @@
 Library
+build
+
 Logs
 obj
 ProjectSettings
@@ -6,8 +8,6 @@ Temp
 .vs
 UserSettings
 Photon
-
-minecraftmobs
 
 .vsconfig
 Assembly-CSharp.csproj

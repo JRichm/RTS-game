@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,12 +12,25 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public void CreateRoom()
     {
-        PhotonNetwork.CreateRoom(roomName.text);
+        if (PhotonNetwork.InLobby && PhotonNetwork.IsConnectedAndReady)
+        {
+            PhotonNetwork.CreateRoom(roomName.text);
+        } else
+        {
+            Debug.LogError("In Lobby: " + PhotonNetwork.InLobby + "\nConnected and Ready: " + PhotonNetwork.IsConnectedAndReady);
+        }
     }
 
     public void JoinRoom()
     {
-        PhotonNetwork.JoinRoom(roomName.text);
+        if (PhotonNetwork.InLobby && PhotonNetwork.IsConnectedAndReady)
+        {
+            PhotonNetwork.JoinRoom(roomName.text);
+        } else
+        {
+            Debug.LogError("In Lobby: " + PhotonNetwork.InLobby + "\nConnected and Ready: " + PhotonNetwork.IsConnectedAndReady);
+        }
+
     }
 
     public override void OnJoinedRoom()
