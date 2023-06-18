@@ -1,0 +1,15 @@
+Library
+build
+
+Logs
+obj
+ProjectSettings
+Temp
+.vs
+UserSettings
+Photon
+
+.vsconfig
+Assembly-CSharp.csproj
+
+*.csproj
