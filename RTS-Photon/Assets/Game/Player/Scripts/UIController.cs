@@ -14,7 +14,6 @@ public class UIController : MonoBehaviour
 
     [SerializeField]
     public List<ButtonData> buttonDataList = new List<ButtonData>();
-    public int farts;
 
     public void Start()
     {

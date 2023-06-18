@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Farm : PlayerStructure
+public class Farm : Structure
 {
     public UIController uiController;
 

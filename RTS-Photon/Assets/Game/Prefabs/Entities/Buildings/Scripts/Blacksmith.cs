@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Blacksmith : PlayerStructure
+public class Blacksmith : Structure
 {
     public override void OnClick()
     {
