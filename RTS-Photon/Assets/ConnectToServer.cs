@@ -29,3 +29,5 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         Debug.Log("Joined And Loading Lobby");
     }
 }
+
+

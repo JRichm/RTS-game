@@ -5,16 +5,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 {
     public InputField roomName;
+    public string gameSceneName;
 
     public void CreateRoom()
     {
         if (PhotonNetwork.InLobby && PhotonNetwork.IsConnectedAndReady)
         {
-            PhotonNetwork.CreateRoom(roomName.text);
+
+            RoomOptions roomOptions = new RoomOptions();
+            PhotonNetwork.CreateRoom(roomName.text, roomOptions);
         } else
         {
             Debug.LogError("In Lobby: " + PhotonNetwork.InLobby + "\nConnected and Ready: " + PhotonNetwork.IsConnectedAndReady);
@@ -38,3 +42,5 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel("Game");
     }
 }
+
+

@@ -5,8 +5,14 @@ using UnityEngine.UI;
 
 public class UIController : MonoBehaviour
 {
-    public void Start()
+    public RenderTexture renderTexture;
+    public RawImage miniMapImage;
+
+    private void Update()
     {
-        
+        if (miniMapImage != null && renderTexture != null)
+        {
+            miniMapImage.texture = renderTexture;
+        }
     }
 }
