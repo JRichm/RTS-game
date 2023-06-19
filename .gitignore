@@ -8,6 +8,9 @@ Temp
 .vs
 UserSettings
 Photon
+TextMesh Pro
+.meta
+
 
 .vsconfig
 Assembly-CSharp.csproj

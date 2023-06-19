@@ -12,8 +12,6 @@ public class ClickHandler : MonoBehaviour
         Structure structure = GetComponent<Structure>();
         Entity entity = GetComponent<Entity>();
 
-        Debug.Log("clicked");
-
         if (structure != null && IsOwnedByPlayer())
         {
             structure.OnClick();
@@ -31,11 +29,6 @@ public class ClickHandler : MonoBehaviour
         
         // Check if object has PhotonView and if it has any owner at all
         PhotonView photonView = GetComponent<PhotonView>();
-
-        // print variables
-        Debug.Log("Entity's Owner: " + photonView.Owner);
-        Debug.Log("Entity's Owner ID: " + photonView.Owner.ActorNumber);
-        Debug.Log("Clicker ID: " + PhotonNetwork.LocalPlayer.ActorNumber);
 
         if (photonView != null && photonView.Owner != null)
         {

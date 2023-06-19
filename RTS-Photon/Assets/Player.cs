@@ -13,14 +13,27 @@ public class Player : MonoBehaviour
     public delegate void OnClickCallback();
     public static event OnClickCallback OnClickEvent;
 
+    private PlayerMovement playerMovement;
+    private UIController uiController;
+    private PhotonView view;
+    private bool isPaused;
 
-    private bool paused;
+    private void Start()
+    {
+        view = GetComponent<PhotonView>();
+        playerMovement = GetComponent<PlayerMovement>();
+        uiController = GetComponentInChildren<UIController>();
+        uiController.pauseMenu.enabled = false;
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (view.IsMine)
         {
-            Debug.LogError(paused);
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                PauseMenu(!isPaused);
+            }
         }
     }
 
@@ -28,5 +41,28 @@ public class Player : MonoBehaviour
     {
         // update the ui based on the selected object
         // add your ui update logic here
+    }
+
+    public void PauseMenu(bool isOpen)
+    {
+        Debug.Log(uiController);
+        // don't do anything if the game is already paused
+        if (isOpen == isPaused) { return; }
+
+        // open pause menu if game is not paused
+        if (isOpen && !isPaused)
+        {
+            uiController.pauseMenu.enabled = true;
+            playerMovement.SetFreeze(true);
+            isPaused = true;
+        }
+
+        // close pause menu if game is paused
+        if (!isOpen && isPaused)
+        {
+            uiController.pauseMenu.enabled = false;
+            playerMovement.SetFreeze(false);
+            isPaused = false;
+        }
     }
 }

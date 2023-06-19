@@ -10,7 +10,6 @@ public class Entity : MonoBehaviour
     protected Vector3 target;
 
     private float distanceToTarget;
-    private float waitTime;
     private bool hasTarget;
 
     private void Start()
@@ -41,7 +40,6 @@ public class Entity : MonoBehaviour
     {
         // move towards the target using a simple linear interpolation
         transform.position = Vector3.MoveTowards(transform.position, target, moveSpeed * Time.deltaTime);
-        waitTime = 0;
     }
 
     public virtual void OnClick()
