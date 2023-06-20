@@ -5,14 +5,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
-public class Player : MonoBehaviour
+public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
     public GameObject selectedEntity;
-    public delegate void OnClickCallback();
-    public static event OnClickCallback OnClickEvent;
-
     private PlayerMovement playerMovement;
     private UIController uiController;
     private PhotonView view;
@@ -24,6 +22,11 @@ public class Player : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         uiController = GetComponentInChildren<UIController>();
         uiController.pauseMenu.enabled = false;
+        if (view.IsMine)
+        {
+            Player localPlayer = PhotonNetwork.LocalPlayer;
+            localPlayer.TagObject = GetComponent<PlayerScript>();
+        }
     }
 
     private void Update()
@@ -37,15 +40,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void UpdateUI(GameObject clickObj)
-    {
-        // update the ui based on the selected object
-        // add your ui update logic here
-    }
-
     public void PauseMenu(bool isOpen)
     {
-        Debug.Log(uiController);
         // don't do anything if the game is already paused
         if (isOpen == isPaused) { return; }
 

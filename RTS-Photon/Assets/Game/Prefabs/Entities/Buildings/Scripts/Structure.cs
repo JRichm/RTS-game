@@ -11,14 +11,15 @@ public class Structure : MonoBehaviour
     public int purchasePrice;
     public List<GameObject> structureEntities;
 
+    private UIController uiController;
+
+    private void Start()
+    {
+        Debug.Log("Blacksmith Start()");
+    }
+
     public virtual void OnClick()
     {
-        // default handling 
-        // add common behavior or leave empty
+        
     }
 }
-
-
-
-
-

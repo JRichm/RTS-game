@@ -2800,9 +2800,9 @@ GameObject:
   - component: {fileID: 2217094102253184253}
   - component: {fileID: 2217094102253184254}
   - component: {fileID: 1516156645315617330}
-  - component: {fileID: 895033138275054393}
+  - component: {fileID: 1043456789821121558}
   m_Layer: 0
-  m_Name: PlayerObj
+  m_Name: P_PlayerObj
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2865,7 +2865,7 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &895033138275054393
+--- !u!114 &1043456789821121558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4860,7 +4860,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 895033138275054393}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: Player, Assembly-CSharp
         m_MethodName: PauseMenu
         m_Mode: 6

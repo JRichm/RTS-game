@@ -16,4 +16,15 @@ public class UIController : MonoBehaviour
             miniMapImage.texture = renderTexture;
         }
     }
+
+    public void UpdateMainButtons(List<GameObject> buttonData)
+    {
+        Debug.Log(buttonData);
+        // loop through buttons
+            // if there is button data at index
+                // update buttons to display name and image
+
+            // if there is no more button data
+                // hide extra buttons
+    }
 }

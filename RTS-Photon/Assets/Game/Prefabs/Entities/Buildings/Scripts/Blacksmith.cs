@@ -8,5 +8,6 @@ public class Blacksmith : Structure
     {
         //base.OnClick();
         Debug.Log("I am a " + this.structureName);
+        base.OnClick();
     }
 }

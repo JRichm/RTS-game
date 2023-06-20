@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b13964a298fcd4241b8a8571738fba8c, type: 3}
       propertyPath: m_Name
-      value: Blacksmith
+      value: B_Blacksmith
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -128,7 +128,10 @@ MonoBehaviour:
   structureIcon: {fileID: 2800000, guid: fbfe9828b05df8d48abd980db35503eb, type: 3}
   startingHealth: 500
   purchasePrice: 7000
-  structureEntities: []
+  structureEntities:
+  - {fileID: 584548643375391780, guid: e92e6f0eccb4a164ba1411f69772c10d, type: 3}
+  - {fileID: 584548643375391780, guid: e92e6f0eccb4a164ba1411f69772c10d, type: 3}
+  - {fileID: 584548643375391780, guid: e92e6f0eccb4a164ba1411f69772c10d, type: 3}
 --- !u!65 &4363167538788283924
 BoxCollider:
   m_ObjectHideFlags: 0

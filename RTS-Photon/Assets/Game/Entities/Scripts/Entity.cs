@@ -5,6 +5,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour
 {
     public string entityName;
+    public Texture2D entityIcon;
     public int health;
     public float moveSpeed;
     protected Vector3 target;

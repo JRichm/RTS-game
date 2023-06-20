@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class ClickHandler : MonoBehaviour
 {
@@ -15,12 +16,11 @@ public class ClickHandler : MonoBehaviour
         if (structure != null && IsOwnedByPlayer())
         {
             structure.OnClick();
-            CallPlayerUpdateUI();
+            CallPlayerUpdateUI(structure.structureEntities);
         }
         else if (entity != null && IsOwnedByPlayer())
         {
             entity.OnClick();
-            CallPlayerUpdateUI();
         }
     }
 
@@ -40,12 +40,14 @@ public class ClickHandler : MonoBehaviour
         return false;
     }
 
-    private void CallPlayerUpdateUI()
+    private void CallPlayerUpdateUI(List<GameObject> buttonData)
     {
-        Player localPlayer = PhotonNetwork.LocalPlayer.TagObject as Player;
+        Photon.Realtime.Player localPhotonPlayer = PhotonNetwork.LocalPlayer;
+        PlayerScript localPlayer = localPhotonPlayer.TagObject as PlayerScript;
+
         if (localPlayer != null)
         {
-            localPlayer.UpdateUI(gameObject);
+            localPlayer.GetComponentInChildren<UIController>().UpdateMainButtons(buttonData);
         }
     }
 }
