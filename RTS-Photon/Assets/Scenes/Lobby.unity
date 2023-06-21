@@ -389,6 +389,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   roomName: {fileID: 1401664599}
+  gameSceneName: GameSetup
 --- !u!4 &309109606
 Transform:
   m_ObjectHideFlags: 0

@@ -1,41 +1,61 @@
 
 
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class SpawnPlayers : MonoBehaviour
+public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
     public GameObject playerPrefab;
-    public GameObject startStructurePrefab;
+    private int currentPlayerIndex = 0;
 
-    public float minX;
-    public float maxX;
-    public float minY;
-    public float maxY;
+    private Vector3[] spawnPositions = new Vector3[]
+    {
+        new Vector3(-50f, 0f, -50f),
+        new Vector3(50f, 0f, -50f),
+        new Vector3(-50f, 0f, 50f),
+        new Vector3(50f, 0f, 50f)
+    };
 
     private void Start()
     {
-        // Generate random position within the specified range
-        float randomX = Random.Range(minX, maxX);
-        float randomY = Random.Range(minY, maxY);
-        Vector2 randomPosition = new Vector3(randomX, 0, randomY);
-
-        // Instantiate the player at the random position
-        GameObject instantiatedPlayer = PhotonNetwork.Instantiate(playerPrefab.name, randomPosition, Quaternion.identity);
-
-        // Instantiate the building at the same position as the player
-        GameObject instantiatedBuilding = PhotonNetwork.Instantiate(startStructurePrefab.name, instantiatedPlayer.transform.position, Quaternion.Euler(90f, 90f, 0f));
-
-        // Assign ownership of the building to the player
-        PhotonView photonView = instantiatedBuilding.GetComponent<PhotonView>();
-        if (photonView != null)
+        if (PhotonNetwork.IsConnectedAndReady)
         {
-            photonView.TransferOwnership(instantiatedPlayer.GetComponent<PhotonView>().Owner);
+            StartCoroutine(SpawnPlayersWithDelay());
         }
     }
-}
 
+    private IEnumerator SpawnPlayersWithDelay()
+    {
+        yield return new WaitForSeconds(currentPlayerIndex  * 1f); // Adjust the delay as needed
+
+        SpawnPlayer();
+
+        yield return new WaitForSeconds(currentPlayerIndex * 1f); // Adjust the delay as needed
+
+        if (currentPlayerIndex < PhotonNetwork.PlayerList.Length)
+        {
+            StartCoroutine(SpawnPlayersWithDelay());
+        }
+    }
+
+    private void SpawnPlayer()
+    {
+        if (currentPlayerIndex < PhotonNetwork.PlayerList.Length)
+        {
+            Vector3 spawnPosition = spawnPositions[currentPlayerIndex];
+            GameObject newPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, Quaternion.identity);
+            currentPlayerIndex++;
+        }
+    }
+
+    public override void OnJoinedRoom()
+    {
+        currentPlayerIndex = PhotonNetwork.PlayerList.Length - 1;
+        SpawnPlayer();
+    }
+}
 
 

@@ -16,9 +16,13 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.InLobby && PhotonNetwork.IsConnectedAndReady)
         {
+            System.Random random = new System.Random();
+
+            int randomNum = random.Next(16777216);
+            string roomHexCode = randomNum.ToString("X6");
 
             RoomOptions roomOptions = new RoomOptions();
-            PhotonNetwork.CreateRoom(roomName.text, roomOptions);
+            PhotonNetwork.CreateRoom(roomHexCode, roomOptions);
         } else
         {
             Debug.LogError("In Lobby: " + PhotonNetwork.InLobby + "\nConnected and Ready: " + PhotonNetwork.IsConnectedAndReady);
@@ -39,7 +43,7 @@ public class CreateAndJoinRooms : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        PhotonNetwork.LoadLevel("Game");
+        PhotonNetwork.LoadLevel("GameSetup");
     }
 }
 

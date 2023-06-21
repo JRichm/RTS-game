@@ -13,11 +13,6 @@ public class Structure : MonoBehaviour
 
     private UIController uiController;
 
-    private void Start()
-    {
-        Debug.Log("Blacksmith Start()");
-    }
-
     public virtual void OnClick()
     {
         
