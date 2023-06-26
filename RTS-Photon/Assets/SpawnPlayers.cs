@@ -1,10 +1,9 @@
 
 
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
+using System.Collections;
+using UnityEngine;
 
 public class SpawnPlayers : MonoBehaviourPunCallbacks
 {
@@ -21,17 +20,41 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        if (PhotonNetwork.IsConnectedAndReady)
+        if (PhotonNetwork.IsConnectedAndReady && PhotonNetwork.IsMasterClient)
         {
-            StartCoroutine(SpawnPlayersWithDelay());
+            //StartCoroutine(SpawnPlayersWithDelay());
+            StartCoroutine(SpawnPlayersRoutine());
         }
+    }
+
+    private IEnumerator SpawnPlayersRoutine()
+    {
+        Debug.LogError("spawning playaer " + currentPlayerIndex);
+        if (currentPlayerIndex < PhotonNetwork.PlayerList.Length)
+        {
+            Vector3 spawnPosition = spawnPositions[currentPlayerIndex];
+            GameObject spawnedPlayer = PhotonNetwork.Instantiate(playerPrefab.name, spawnPosition, Quaternion.identity);
+
+            // Get the PhotonView component of the spawned player object
+            PhotonView photonView = spawnedPlayer.GetComponent<PhotonView>();
+
+            // Set the ownership of the PhotonView to the current player
+            photonView.TransferOwnership(PhotonNetwork.PlayerList[currentPlayerIndex]);
+
+            // Attach the input script to the player object
+            //spawnedPlayer.AddComponent<PlayerMovement>();
+
+            currentPlayerIndex++;
+        }
+
+        yield return new WaitForSeconds(1f);
+        StartCoroutine(SpawnPlayersRoutine());
     }
 
     private IEnumerator SpawnPlayersWithDelay()
     {
         // wait for one second
         yield return new WaitForSeconds(currentPlayerIndex  * 1f);
-
 
         // spawn player
         SpawnPlayer();
@@ -42,7 +65,6 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
         // start loop if there are more players to spawn
         if (currentPlayerIndex < PhotonNetwork.PlayerList.Length)
         {
-
             // start coroutine
             StartCoroutine(SpawnPlayersWithDelay());
         }
@@ -64,7 +86,6 @@ public class SpawnPlayers : MonoBehaviourPunCallbacks
             currentPlayerIndex++;
         }
     }
-
 
     // spawn player if joining after game started
     public override void OnJoinedRoom()

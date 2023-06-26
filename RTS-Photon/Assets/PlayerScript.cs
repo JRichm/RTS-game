@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Start()
     {
+        gameObject.AddComponent<PhotonView>();
         view = GetComponent<PhotonView>();
         playerMovement = GetComponent<PlayerMovement>();
         uiController = GetComponentInChildren<UIController>();
